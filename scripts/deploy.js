@@ -3,7 +3,7 @@ const main = async () => {
   const domainContractFactory = await hre.ethers.getContractFactory('Domains');
   
   // Set Name Service
-  const domainContract = await domainContractFactory.deploy("delta");
+  const domainContract = await domainContractFactory.deploy("zkevm");
   await domainContract.deployed();
 
   // Get contract address

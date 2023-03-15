@@ -6,31 +6,65 @@ This project is a simple fullstack dApp that allows users to mint a blockchain n
 
 1. Clone the repo
 
-``sh
+```sh
 git clone https://github.com/nunocgoncalves/intro-polygon-zkevm.git
-``
+```
 
 2. Install dependencies
 
-``sh
+```sh
 yarn
-``
+```
 
-3. Setup your ENVs
+3. Copy the .env.example file and add your private key
+
+```sh
+cp .env.example .env
+```
+
+4. Get some Goerli test ETH ([faucet](https://goerlifaucet.com/))
+
+5. Bridge to the zkEVM testnet using the [zkEVM Bridge](https://public.zkevm-test.net/)
+
+6. Setup Hardhat
+
+- Add zkEVM to the ``hardhat.config.js``
+
+```js
+networks: {
+    zkEVM: {
+      url: `https://rpc.public.zkevm-test.net`,
+    },
+},
+```
+
+### Deploy the contract
 
 ``sh
-cp .env.example .env
+npx hardhat run scripts/deploy.js --network zkEVM
 ``
 
-3.1. Add your private key
+### Connect the contract to the frontend
 
-## Deploy the contract
+1. Get the contract ABI
 
-### Preparations
+- Copy the contract ABI from ``artifacts/contracts/Domains.sol/Domains.json`` to ``app/src/utils/``
+- Rename it to contractABI.json
 
-1. Get sone Goerli test ETH
+2. Add the zkEVM network to the frontend
 
-2. Bridge to the zkEVM testnet using the [zkEVM Bridge](https://public.zkevm-test.net/)
+- Add it to the network utils ``app/src/utils/networks.js``
+
+```js
+const networks = {
+    ...
+    "0x5122": "Polygon zkEVM",
+}
+```
+
+- Tweak ``useEffect`` and ``switchNetwork`` in ``app/src/App.js``
+
+3. Add contract address in ``app/src/App.js``
 
 ## Resources
 
