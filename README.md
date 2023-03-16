@@ -58,7 +58,7 @@ npx hardhat run scripts/deploy.js --network zkEVM
 ```js
 const networks = {
     ...
-    "0x5122": "Polygon zkEVM",
+    "0x5a2": "Polygon zkEVM Testnet",
 }
 ```
 
