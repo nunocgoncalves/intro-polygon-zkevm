@@ -13,7 +13,7 @@ import polygonLogo from './assets/polygonlogo.png';
 import ethLogo from './assets/ethlogo.png';
 
 // Define constants
-const CONTRACT_ADDRESS = '';
+const CONTRACT_ADDRESS = '0x4A612270577cE537D8eaaD1E12F3C127e0578fC7';
 const tld = '.zkevm';
 const TWITTER_HANDLE = 'nunomiguelcg';
 const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
@@ -44,7 +44,7 @@ const App = () => {
 	// Re run every time the currentAccount or network are changed
 	useEffect(() => {
 		
-		if (network === 'Polygon Mumbai Testnet') {
+		if (network === 'Polygon zkEVM Testnet') {
 			fetchMints();
 		}
 
@@ -134,7 +134,7 @@ const App = () => {
 				// Switch Network
 				await window.ethereum.request({
 					method: 'wallet_switchEthereumChain',
-					params: [{ chainId: '0x13881' }], // The hexadecimal network ids can be found on /utils/networks.js
+					params: [{ chainId: '0x5a2' }], // The hexadecimal network ids can be found on /utils/networks.js
 				});
 			
 			} catch (error) {
@@ -148,15 +148,15 @@ const App = () => {
 							method: 'wallet_addEthereumChain',
 							params: [
 								{	
-									chainId: '0x13881',
-									chainName: 'Polygon Mumbai Testnet',
-									rpcUrls: ['https://rpc-mumbai.matic.today'],
+									chainId: '0x5122',
+									chainName: 'Polygon zkEVM Testnet',
+									rpcUrls: ['https://rpc.public.zkevm-test.net'],
 									nativeCurrency: {
-											name: "Mumbai Matic",
-											symbol: "MATIC",
+											name: "Ethereum",
+											symbol: "ETH",
 											decimals: 18
 									},
-									blockExplorerUrls: ["https://mumbai.polygonscan.com/"]
+									blockExplorerUrls: ["https://explorer.public.zkevm-test.net/"]
 								},
 							],
 						});
@@ -225,14 +225,14 @@ const App = () => {
 				// Check if the transaction was successfully completed
 				if (receipt.status === 1) {
 				
-					console.log("Domain minted! https://mumbai.polygonscan.com/tx/"+tx.hash);
+					console.log("Domain minted! https://explorer.public.zkevm-test.net/tx/"+tx.hash);
 			  
 			  		// DEBUG! Consider moving the setRecord function up
 					// Set the record for the domain
 			  		tx = await contract.setRecord(domain, record);
 			  		await tx.wait();
 	  
-			  		console.log("Record set! https://mumbai.polygonscan.com/tx/"+tx.hash);
+			  		console.log("Record set! https://explorer.public.zkevm-test.net/tx/"+tx.hash);
 				
 			  	// Call fetchMints after 2 seconds
 			  	setTimeout(() => {
@@ -283,7 +283,7 @@ const App = () => {
 					// Update record
 					let tx = await contract.setRecord(domain, record);
 					await tx.wait();
-					console.log("Record set https://mumbai.polygonscan.com/tx/"+tx.hash);
+					console.log("Record set https://explorer.public.zkevm-test.net/tx/"+tx.hash);
 	  
 					// Update state variables
 					fetchMints();
@@ -366,11 +366,11 @@ const App = () => {
 	// Renders the input field
 	const renderInputForm = () =>{
 
-		if (network !== 'Polygon Mumbai Testnet') {
+		if (network !== 'Polygon zkEVM Testnet') {
 			
 			return (
 				<div className="connect-wallet-container">
-			  		<p>Please connect to Polygon Mumbai Testnet</p>
+			  		<p>Please connect to Polygon zkEVM Testnet</p>
 			  		<button className='cta-button mint-button' onClick={switchNetwork}>Click here to switch</button>
 				</div>
 		  	);
