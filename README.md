@@ -2,6 +2,10 @@
 
 This project is a simple fullstack dApp that allows users to mint a blockchain name as an NFT on Polygon zkEVM.
 
+## What is zkEVM?
+ 
+- Polygon zkEVM is a decentralized Ethereum Layer 2 scalability solution that uses cryptographic zero-knowledge proofs to offer validity and quick finality to off-chain transaction computation, also known as a ZK-Rollup. ([learn more](https://wiki.polygon.technology/docs/zkEVM/introduction))
+
 ## Getting started
 
 1. Clone the repo
@@ -40,9 +44,9 @@ networks: {
 
 ### Deploy the contract
 
-``sh
+```sh
 npx hardhat run scripts/deploy.js --network zkEVM
-``
+```
 
 ### Connect the contract to the frontend
 
